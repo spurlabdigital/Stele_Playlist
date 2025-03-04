@@ -16,7 +16,7 @@
         video {
             max-width: 100%;
             max-height: 100%;
-            transition: opacity 1s ease; /* Übergang auf 1 Sekunde verlängert für weicheren Effekt */
+            transition: opacity 1s ease;
         }
     </style>
 </head>
@@ -65,6 +65,12 @@
 
         // Eventlistener für das "ended"-Event, um das nächste Video zu laden, wenn das aktuelle Video zu Ende ist
         videoPlayer.addEventListener("ended", playNextVideo);
+
+        // Eventlistener für das "error"-Event, um das nächste Video zu laden, wenn ein Fehler auftritt (z. B. Video nicht gefunden)
+        videoPlayer.addEventListener("error", () => {
+            console.log(`Fehler beim Laden des Videos. Überspringe zu Video ${currentIndex + 1}`);
+            playNextVideo();
+        });
 
         // Sicherstellen, dass das erste Video richtig geladen wird
         videoPlayer.load();
