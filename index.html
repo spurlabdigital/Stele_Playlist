@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Playlist</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        video {
+            max-width: 100%;
+            max-height: 100%;
+            transition: opacity 1s ease; /* Übergang auf 1 Sekunde verlängert für weicheren Effekt */
+        }
+    </style>
+</head>
+<body>
+    <video id="videoPlayer" autoplay muted playsinline>
+        <source id="videoSource" src="https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video01.mp4" type="video/mp4">
+        Ihr Browser unterstützt kein HTML5-Video.
+    </video>
+
+    <script>
+        const videos = [
+            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video01.mp4",
+            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video02.mp4",
+            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video03.mp4",
+            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video04.mp4",
+            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video05.mp4",
+            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video06.mp4",
+            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video07.mp4",
+            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video08.mp4",
+            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video09.mp4",
+            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/video10.mp4"
+        ];
+
+        let currentIndex = 0;
+        const videoPlayer = document.getElementById("videoPlayer");
+        const videoSource = document.getElementById("videoSource");
+
+        // Funktion zum Abspielen des nächsten Videos mit sanftem Übergang
+        function playNextVideo() {
+            // Setze das Video auf unsichtbar, um den Übergang zu starten
+            videoPlayer.style.opacity = 0;
+
+            // Wechsel zum nächsten Video
+            currentIndex = (currentIndex + 1) % videos.length;
+            videoSource.src = videos[currentIndex]; // Quelle des Videos ändern
+
+            // Warten bis das neue Video geladen ist, um die Transparenz wieder zu aktivieren
+            videoPlayer.load();
+
+            // Wenn das neue Video geladen ist, setze die Opazität wieder auf 1 (sichtbar)
+            videoPlayer.oncanplaythrough = () => {
+                videoPlayer.play(); // Wiedergabe starten
+                videoPlayer.style.opacity = 1; // Übergang wieder sichtbar machen
+            };
+        }
+
+        // Eventlistener für das "ended"-Event, um das nächste Video zu laden, wenn das aktuelle Video zu Ende ist
+        videoPlayer.addEventListener("ended", playNextVideo);
+
+        // Sicherstellen, dass das erste Video richtig geladen wird
+        videoPlayer.load();
+        videoPlayer.play();
+    </script>
+</body>
+</html>
