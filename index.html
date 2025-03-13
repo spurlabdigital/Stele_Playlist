@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-    <video id="videoPlayer" autoplay muted playsinline>
+    <video id="videoPlayer" autoplay **playsinline**> <!-- 🔴 "muted" entfernt -->
         <source id="videoSource" src="https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_01.mp4" type="video/mp4">
         Ihr Browser unterstützt kein HTML5-Video.
     </video>
@@ -74,7 +74,21 @@
 
         // Sicherstellen, dass das erste Video richtig geladen wird
         videoPlayer.load();
-        videoPlayer.play();
+        videoPlayer.muted = false; // 🔴 Stummschaltung deaktivieren
+
+videoPlayer.play().catch(error => {
+    console.log("Autoplay mit Ton wurde blockiert. Versuche Trick...");
+    
+    // 🔴 Trick: Leises Audio-Element abspielen, um Autoplay mit Ton zu aktivieren
+    const silentAudio = new Audio();
+    silentAudio.src = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQQAAAAA"; // 🔴 0,1 Sek. Stille
+    silentAudio.play().then(() => {
+        videoPlayer.play(); // 🔴 Nach erfolgreicher Audiowiedergabe Video mit Ton starten
+    }).catch(err => {
+        console.log("Automatische Wiedergabe mit Ton erfordert Interaktion.");
+    });
+});
+        
     </script>
 </body>
 </html>
