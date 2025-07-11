@@ -1,89 +1,79 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Playlist</title>
-    <style>
-        body {
-            margin: 0;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        video {
-            max-width: 100%;
-            max-height: 100%;
-            transition: opacity 1s ease;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Playlist</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    video {
+      max-width: 100%;
+      max-height: 100%;
+      transition: opacity 1s ease;
+    }
+  </style>
 </head>
 <body>
-    <video id="videoPlayer" autoplay playsinline>
-        <source id="videoSource" src="https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_01.mp4" type="video/mp4">
-        Ihr Browser unterstützt kein HTML5-Video.
-    </video>
+  <video id="videoPlayer" autoplay playsinline muted></video>
 
-    <script>
-        const videos = [
-            "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/5f495999-7801-4714-b345-399bdaba514c/file/id/2714/file_version/name/1080p",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_07.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_02.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_03.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_04.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_05.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_06.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_07.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_08.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_09.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_10.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_11.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_12.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_13.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_14.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_15.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_16.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_17.mp4",
-            "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_18.mp4"
-        ];
+  <script>
+    const videos = [
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_01.mp4",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/5f495999-7801-4714-b345-399bdaba514c/file/id/2714/file_version/name/1080p",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_02.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_03.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_04.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_05.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_06.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_07.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_08.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_09.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_10.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_11.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_12.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_13.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_14.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_15.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_16.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_17.mp4",
+      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_18.mp4"
+    ];
 
-        let currentIndex = 0;
-        const videoPlayer = document.getElementById("videoPlayer");
-        const videoSource = document.getElementById("videoSource");
+    let currentIndex = 0;
+    const videoPlayer = document.getElementById("videoPlayer");
 
-        // Funktion zum Abspielen des nächsten Videos mit sanftem Übergang
-        function playNextVideo() {
-            // Setze das Video auf unsichtbar, um den Übergang zu starten
-            videoPlayer.style.opacity = 0;
+    function playVideo(index) {
+      videoPlayer.style.opacity = 0;
 
-            // Wechsel zum nächsten Video
-            currentIndex = (currentIndex + 1) % videos.length;
-            videoSource.src = videos[currentIndex]; // Quelle des Videos ändern
+      videoPlayer.src = videos[index];
+      videoPlayer.load();
 
-            // Warten bis das neue Video geladen ist, um die Transparenz wieder zu aktivieren
-            videoPlayer.load();
+      videoPlayer.oncanplaythrough = () => {
+        videoPlayer.play().catch(err => console.error("Play-Fehler:", err));
+        videoPlayer.style.opacity = 1;
+      };
+    }
 
-            // Wenn das neue Video geladen ist, setze die Opazität wieder auf 1 (sichtbar)
-            videoPlayer.oncanplaythrough = () => {
-                videoPlayer.play(); // Wiedergabe starten
-                videoPlayer.style.opacity = 1; // Übergang wieder sichtbar machen
-            };
-        }
+    function playNextVideo() {
+      currentIndex = (currentIndex + 1) % videos.length;
+      playVideo(currentIndex);
+    }
 
-        // Eventlistener für das "ended"-Event, um das nächste Video zu laden, wenn das aktuelle Video zu Ende ist
-        videoPlayer.addEventListener("ended", playNextVideo);
+    videoPlayer.addEventListener("ended", playNextVideo);
+    videoPlayer.addEventListener("error", () => {
+      console.warn(`Fehler beim Laden von Video ${currentIndex}. Nächstes wird geladen.`);
+      playNextVideo();
+    });
 
-        // Eventlistener für das "error"-Event, um das nächste Video zu laden, wenn ein Fehler auftritt (z. B. Video nicht gefunden)
-        videoPlayer.addEventListener("error", () => {
-            console.log(`Fehler beim Laden des Videos. Überspringe zu Video ${currentIndex + 1}`);
-            playNextVideo();
-        });
-
-        // Sicherstellen, dass das erste Video richtig geladen wird
-        videoPlayer.load();
-        videoPlayer.play();
-    </script>
+    // Start mit erstem Video
+    playVideo(currentIndex);
+  </script>
 </body>
 </html>
