@@ -21,29 +21,28 @@
   </style>
 </head>
 <body>
-  <video id="videoPlayer" autoplay playsinline muted></video>
+  <video id="videoPlayer" autoplay playsinline></video>
 
   <script>
     const videos = [
       "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/5f495999-7801-4714-b345-399bdaba514c/file/id/2714/file_version/name/1080p",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_01.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_02.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_03.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_04.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_05.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_06.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_07.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_08.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_09.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_10.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_11.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_12.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_13.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_14.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_15.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_16.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_17.mp4",
-      "https://gesellschaft-kultur-geschichte.de/wp-content/uploads/stele_video_18.mp4"
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/602581da-0b66-4650-9d6c-a32ae9d2fd53/file/id/2705/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/7d9023e7-e366-4b29-9cb1-efd49c85fa26/file/id/3021/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/9ffb1801-b314-4d4d-8a44-18a169c6c8bf/file/id/2749/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/b503852b-1be6-4d66-b903-81aaf37128a2/file/id/2770/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/535181b0-bc89-40aa-a880-844a59678c06/file/id/2707/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/6760731a-6530-4146-9d9e-9d686a0a8b33/file/id/2728/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/1c81b5b2-7ac7-4f7e-8aa1-981e17839dda/file/id/2763/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/9e3e5c11-b83e-4735-ba20-e0b520872f7a/file/id/2706/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/8b9ed269-d515-4a70-a0d8-d08bb0060fb9/file/id/2735/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/0d4daa1d-ba08-4949-9a37-2013c221ba06/file/id/3042/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/cd31b4fa-f1a7-4d5f-a3cc-e85f50b04c4d/file/id/2771/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/ee0be1a9-290d-4217-92ce-394e1198df80/file/id/2742/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/1b2d2e9b-d65b-433c-9e93-cd7eb6fb52e6/file/id/3109/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/854e2cd4-1989-4b6e-836a-23fa06151699/file/id/2799/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/687e5300-a692-4af8-830a-ccc76b872979/file/id/2721/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/62cbb751-5382-4a26-96a6-6dc09a817d39/file/id/2784/file_version/name/1080p",
+      "https://dams.gesellschaft-kultur-geschichte.de:4443/api/v1/objects/uuid/3a641e05-08ab-4815-8b87-82e07c3a08aa/file/id/2684/file_version/name/1080p",
     ];
 
     let currentIndex = 0;
